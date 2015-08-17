@@ -1,0 +1,60 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:weightSum="2">
+<fragment android:layout_width="match_parent"
+    android:layout_height="0dp" android:id="@+id/map" tools:context=".MapsActivity"
+    android:name="com.google.android.gms.maps.SupportMapFragment"
+    android:layout_weight="1" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:weightSum="5">
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:text="LAT: 128.234"
+            android:id="@+id/txtLat"
+            android:layout_weight="1"
+            android:gravity="center" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:text="LNG: 23.34"
+            android:id="@+id/txtLng"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:singleLine="false" />
+
+        <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:id="@+id/ediName"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:hint="NOMBRE" />
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:text="GUARDAR"
+            android:id="@+id/btnSave"
+            android:layout_weight="1"
+            android:gravity="center" />
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:text="ABRIR VIDEO"
+            android:id="@+id/btnOpen"
+            android:onClick="openYoutubeVideo"
+            android:layout_weight="1"
+            android:gravity="center" />
+    </LinearLayout>
+</LinearLayout>

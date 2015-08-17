@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="30dp">
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="80dp"
+        android:id="@+id/imageView"
+        android:scaleType="centerInside" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Username"
+        android:id="@+id/textView"
+        android:textSize="25sp"
+        android:layout_gravity="center_horizontal" />
+
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtUser"
+        android:textSize="25sp"
+        android:layout_gravity="center_horizontal" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Password"
+        android:id="@+id/textView2"
+        android:textSize="25sp"
+        android:layout_gravity="center_horizontal" />
+
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtPass"
+        android:inputType="textPassword"
+        android:textSize="25sp"
+        android:layout_gravity="center_horizontal" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Email"
+        android:id="@+id/textView3"
+        android:textSize="25sp" />
+
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtEmail"
+        android:inputType="textEmailAddress"
+        android:textSize="25sp"
+        android:layout_gravity="center_horizontal" />
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Login"
+        android:id="@+id/button"
+        android:textSize="25sp"
+        android:onClick="doLogin" />
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Signup"
+        android:id="@+id/button2"
+        android:textSize="25sp"
+        android:onClick="doSignup" />
+
+</LinearLayout>
