@@ -1,0 +1,38 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="10">
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:id="@+id/lv_languages"
+        android:layout_weight="4" />
+
+    <Button
+        android:id="@+id/btn_speak"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:onClick="speak"
+        android:padding="@dimen/padding_medium"
+        android:text="@string/speak"
+        tools:context=".VoiceRecognitionActivity"
+        android:layout_weight="1" />
+
+    <Spinner
+        android:id="@+id/s_matches"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:entries="@array/a_n_matches"
+        android:prompt="@string/n_matches"
+        android:layout_weight="1" />
+
+    <ListView
+        android:id="@+id/lv_matches"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="4" />
+
+</LinearLayout>
