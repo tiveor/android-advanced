@@ -11,7 +11,7 @@ import java.net.URL;
 
 public class Main {
 
-    public static final String API_KEY = "YOUR_API_KEY_HERE";
+    public static final String API_KEY = "AIzaSyBPbxMG8QD9MblTG4f2Jmy7Txy43tkFoGc";
 
     public static void main(String[] args) {
         try {
