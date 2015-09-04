@@ -26,6 +26,7 @@ import javax.microedition.khronos.egl.EGLConfig;
 
 /**
  * Copyright 2014 Google Inc. All Rights Reserved.
+ * https://developers.google.com/cardboard/android/get-started
  * A Cardboard sample application.
  */
 public class MainActivity extends CardboardActivity implements CardboardView.StereoRenderer {
