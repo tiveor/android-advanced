@@ -525,10 +525,18 @@ public class TetrisPanel extends View {
         public void playBell() {
             sp.play(bellId, 1, 1, 1, 0, 1.0f);
         }
+
+        public void stop(){
+            sp.stop(hitId);
+            sp.stop(gameOverId);
+            sp.stop(bellId);
+        }
     }
 
     public void destroy() {
         back.stop();
         back = null;
+        effects.stop();
+        effects = null;
     }
 }

@@ -28,6 +28,7 @@ public class TetrisActivity extends Activity {
     }
 
     public void onDestroy() {
+        tetrisPanel.gameOver();
         tetrisPanel.destroy();
         super.onDestroy();
     }
