@@ -92,7 +92,7 @@ public class TetrisPanel extends View {
         MoveTask task = new MoveTask(MoveTask.MOVE_DOWN);
         timer = new Timer();
         timer.schedule(task, 500, DOWN_SPEED);
-        back = MediaPlayer.create(context, R.raw.piano);
+        back = MediaPlayer.create(context, R.raw.beat);
         back.setLooping(true);
         back.start();
         effects = new Effects(context);
@@ -107,23 +107,11 @@ public class TetrisPanel extends View {
         canvas.drawColor(Color.rgb(53, 53, 67));
 
         drawStaticFigures(canvas);
-        drawFallingFigure(canvas);
         drawCurrentFigure(canvas);
         drawRightPanel(canvas);
         drawNextFigure(canvas);
         drawScore(canvas);
         drawDataStatus(canvas);
-    }
-
-    private void drawFallingFigure(Canvas canvas) {
-        for (int i = 0; i < 4; i++) {
-            figureRect.set((currentFigure.data[i][0] + currentFigure.x - 4) * figureWidth + 1,
-                    bounds.height() - (currentFigure.data[i][1] - 3 + currentFigure.y) * figureHeight + 1,
-                    (currentFigure.data[i][0] - 3 + currentFigure.x) * figureWidth - 1,
-                    bounds.height() - (currentFigure.data[i][1] - 4 + currentFigure.y) * figureHeight - 1);
-            paint.setColor(Color.BLUE);
-            canvas.drawRect(figureRect, paint);
-        }
     }
 
     private void drawStaticFigures(Canvas canvas) {
@@ -184,6 +172,7 @@ public class TetrisPanel extends View {
                 float y = me.getY();
                 int height = bounds.height();
                 int width = bounds.width();
+
                 if (y < 3 * height / 4) {
                     if (x <= width / 5) {
                         strafetask = new MoveTask(MoveTask.MOVE_LEFT);
@@ -240,8 +229,9 @@ public class TetrisPanel extends View {
                     currentFigure.drop(pool);
                     break;
                 case MOVE_DOWN: {
-                    while (action)
-                        ;
+
+                    while (action) ;
+
                     if (currentFigure.down(pool) == false) {
                         if (newFigure == 0)
                             newFigure = 2;
@@ -269,7 +259,8 @@ public class TetrisPanel extends View {
         for (int j = 4; j < COLUMNS + 4; j++) {
             combo = true;
             for (int i = 4; i < ROWS + 4; i++)
-                if (pool[i][j] == 0) combo = false;
+                if (pool[i][j] == 0)
+                    combo = false;
             if (combo) {
                 for (int k = j; k < COLUMNS + 4; k++)
                     for (int l = 4; l < ROWS + 4; l++)
@@ -278,17 +269,22 @@ public class TetrisPanel extends View {
                 j--;
             }
         }
+
         switch (x) {
             case 1:
+                effects.playLine();
                 score += 100;
                 break;
             case 2:
+                effects.playLine();
                 score += 300;
                 break;
             case 3:
+                effects.playLine();
                 score += 700;
                 break;
             case 4:
+                effects.playLine();
                 score += 1500;
                 break;
         }
@@ -444,15 +440,18 @@ public class TetrisPanel extends View {
                     data[i][0] = data[i][1];
                     data[i][1] = (int) (3 - buf);
                 }
-            else return false;
+            else
+                return false;
             return true;
         }
 
         public boolean moveLeft(int[][] pool) {
             x--;
+
             if (crossing(pool))
                 x++;
-            else return true;
+            else
+                return true;
             return false;
         }
 
@@ -483,9 +482,9 @@ public class TetrisPanel extends View {
         }
 
         public void drop(int[][] pool) {
-            do
+            do {
                 y--;
-            while (!crossing(pool));
+            } while (!crossing(pool));
             y++;
         }
 
@@ -506,12 +505,14 @@ public class TetrisPanel extends View {
         private int hitId;
         private int gameOverId;
         private int bellId;
+        private int lineId;
 
         public Effects(Context context) {
             sp = new SoundPool(3, AudioManager.STREAM_MUSIC, 0);
             hitId = sp.load(context, R.raw.hit, 1);
             gameOverId = sp.load(context, R.raw.game_over, 2);
             bellId = sp.load(context, R.raw.bell, 3);
+            lineId = sp.load(context, R.raw.line, 4);
         }
 
         public void playHit() {
@@ -526,7 +527,11 @@ public class TetrisPanel extends View {
             sp.play(bellId, 1, 1, 1, 0, 1.0f);
         }
 
-        public void stop(){
+        public void playLine() {
+            sp.play(lineId, 1, 1, 1, 0, 1.0f);
+        }
+
+        public void stop() {
             sp.stop(hitId);
             sp.stop(gameOverId);
             sp.stop(bellId);

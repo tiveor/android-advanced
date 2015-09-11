@@ -56,9 +56,11 @@ public class PongPanel extends View {
     private void physics() {
         ballX += ballXVelocity;
         ballY += ballYVelocity;
+
         if ((ball.left >= pad1Graphic.left) && (ball.right <= pad1Graphic.right) &&
                 (ballY >= pad1Graphic.top) && (ballY > pad1Graphic.bottom))
             ballY = pad1Graphic.top - ballRadius;
+
         setBall();
         setPad1();
         setPad2();
@@ -106,5 +108,4 @@ public class PongPanel extends View {
         if (ball.bottom <= 0f)
             ballYVelocity = -ballYVelocity;
     }
-
 }
