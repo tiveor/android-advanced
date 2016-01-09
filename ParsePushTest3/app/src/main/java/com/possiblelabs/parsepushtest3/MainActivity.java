@@ -45,7 +45,11 @@ public class MainActivity extends AppCompatActivity {
         push.sendInBackground(new SendCallback() {
             @Override
             public void done(ParseException e) {
-                Snackbar.make(fab, "Message sent successfully", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                if (e == null) {
+                    Snackbar.make(fab, "Message sent successfully", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                } else {
+                    Snackbar.make(fab, "Error found:" + e.getMessage(), Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                }
             }
         });
     }
