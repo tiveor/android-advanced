@@ -11,14 +11,14 @@ import java.net.URL;
 
 public class Main {
 
-    public static final String API_KEY = "AIzaSyBPbxMG8QD9MblTG4f2Jmy7Txy43tkFoGc";
+    public static final String API_KEY = "AIzaSyCzwK24d89WmjDcMScNhoMgFLPfmKhQGM8";
 
     public static void main(String[] args) {
         try {
             // Prepare JSON containing the GCM message content. What to send and where to send.
             JSONObject jGcmData = new JSONObject();
             JSONObject jData = new JSONObject();
-            jData.put("message", "HOLA GCM!!!!");
+            jData.put("message", "como es que cuentas?");
             // Where to send GCM message.
             if (args.length > 0 && args[0] != null) {
                 jGcmData.put("to", args[0].trim());
