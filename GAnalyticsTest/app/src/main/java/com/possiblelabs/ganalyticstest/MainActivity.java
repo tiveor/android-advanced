@@ -1,13 +1,11 @@
 package com.possiblelabs.ganalyticstest;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
 import com.google.android.gms.analytics.HitBuilders;
-import com.google.android.gms.analytics.Tracker;
 
 public class MainActivity extends BaseActivity {
 
