@@ -5,8 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.crashlytics.android.Crashlytics;
@@ -22,6 +21,7 @@ import com.twitter.sdk.android.core.identity.TwitterLoginButton;
 import com.twitter.sdk.android.core.models.Search;
 import com.twitter.sdk.android.core.models.Tweet;
 import com.twitter.sdk.android.tweetui.TweetUi;
+import com.twitter.sdk.android.tweetui.TweetView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,20 +30,24 @@ import io.fabric.sdk.android.Fabric;
 
 public class MainActivity extends AppCompatActivity {
 
+    // Note: Your consumer key and secret should be obfuscated in your source code before shipping.
+    private static final String TWITTER_KEY = "YVsZtBSFP8qTZ9i4Oc7tCG4xn";
+    private static final String TWITTER_SECRET = "aYbDxLA0b0kaAndAXbIZ97tZOw8VP7MANIwrCyxytVyL5QWzLO";
 
-    private ListView list;
+    private LinearLayout layout;
     private TwitterLoginButton lg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        TwitterAuthConfig authConfig2 = new TwitterAuthConfig(getResources().getString(R.string.twitter_key), getResources().getString(R.string.twitter_secret));
-        Fabric.with(this, new Twitter(authConfig2), new Crashlytics(), new TweetUi());
+
+        TwitterAuthConfig authConfig = new TwitterAuthConfig(TWITTER_KEY, TWITTER_SECRET);
+        Fabric.with(this, new Twitter(authConfig), new Crashlytics(), new TweetUi(), new Twitter(authConfig));
 
         setContentView(R.layout.activity_main);
 
-        list = (ListView) findViewById(R.id.listView);
+        layout = (LinearLayout) findViewById(R.id.layout);
         lg = (TwitterLoginButton) findViewById(R.id.login_button);
         lg.setCallback(new Callback<TwitterSession>() {
             @Override
@@ -57,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //loadTweets();
+        loadTweets();
     }
 
     private void loadTweets() {
@@ -66,11 +70,9 @@ public class MainActivity extends AppCompatActivity {
         twitterApiClient.getSearchService().tweets("Bolivia", null, "es", "es", "recent", 20, null, null, null, null, new Callback<Search>() {
             @Override
             public void success(Result<Search> result) {
-                List<String> tweets = new ArrayList<>();
-                for (Tweet tweet : result.data.tweets)
-                    tweets.add(tweet.user.name + " > " + tweet.text);
-
-                list.setAdapter(new ArrayAdapter<>(MainActivity.this, android.R.layout.simple_list_item_1, tweets));
+                for (Tweet tweet : result.data.tweets) {
+                    layout.addView(new TweetView(MainActivity.this, tweet));
+                }
             }
 
             @Override
