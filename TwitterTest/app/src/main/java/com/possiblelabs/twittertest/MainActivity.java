@@ -37,14 +37,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
         TwitterAuthConfig authConfig2 = new TwitterAuthConfig(getResources().getString(R.string.twitter_key), getResources().getString(R.string.twitter_secret));
         Fabric.with(this, new Twitter(authConfig2), new Crashlytics(), new TweetUi());
 
+        setContentView(R.layout.activity_main);
 
         list = (ListView) findViewById(R.id.listView);
-
         lg = (TwitterLoginButton) findViewById(R.id.login_button);
         lg.setCallback(new Callback<TwitterSession>() {
             @Override
@@ -58,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        loadTweets();
+        //loadTweets();
     }
 
     private void loadTweets() {
