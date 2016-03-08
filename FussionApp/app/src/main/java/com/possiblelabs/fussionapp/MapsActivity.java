@@ -1,8 +1,8 @@
 package com.possiblelabs.fussionapp;
 
 import android.content.Intent;
-import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -14,6 +14,8 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.youtube.player.YouTubeStandalonePlayer;
 
 import java.util.List;
@@ -24,11 +26,14 @@ public class MapsActivity extends FragmentActivity {
     private Marker currentMarker;
     private LatLng currentPosition;
 
+    private Polyline polyline;
+
     private TextView txtLat;
     private TextView txtLng;
     private EditText ediName;
     private Button btnSave;
     private FPlaceDAO dao;
+    private int count = 0;
 
 
     @Override
@@ -146,14 +151,24 @@ public class MapsActivity extends FragmentActivity {
     }
 
     private void doMapClick(LatLng latLng) {
+        count++;
+
         if (currentMarker == null) {
             currentMarker = mMap.addMarker(new MarkerOptions().position(latLng).title("Posición Actual"));
         } else {
+
+            if (count == 2) {
+                polyline = mMap.addPolyline(new PolylineOptions().add(currentMarker.getPosition(), latLng));
+            } else {
+                List<LatLng> points = polyline.getPoints();
+                points.add(latLng);
+                polyline.setPoints(points);
+            }
+
             currentMarker.setPosition(latLng);
         }
         updateLatLng(latLng);
     }
-
 
     public void openYoutubeVideo(View view) {
         Intent intent = YouTubeStandalonePlayer.createVideoIntent(this, getResources().getString(R.string.google_maps_key), "BZP1rYjoBgI");
